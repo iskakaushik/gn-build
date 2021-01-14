@@ -40,7 +40,10 @@ if (mac_sdk_path == "") {
 }
 
 script_name = "//build/toolchain/mac/sdk_info.py"
-sdk_info_args = []
+sdk_info_args = [
+  "--get_machine_info",
+  "--get_sdk_info",
+]
 if (!use_system_xcode) {
   sdk_info_args += [
     "--developer_dir",
