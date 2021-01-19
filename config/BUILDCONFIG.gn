@@ -345,14 +345,16 @@ if (is_win) {
   ]
 }
 
-import("//build_ex/config/project_defaults.gni")
+if (defined(customize_compiler_args) && customize_compiler_args) {
+  import("//build_ex/config/project_defaults.gni")
 
-if (defined(default_compiler_configs_add)) {
-  default_compiler_configs += default_compiler_configs_add
-}
+  if (defined(default_compiler_configs_add)) {
+    default_compiler_configs += default_compiler_configs_add
+  }
 
-if (defined(default_compiler_configs_remove)) {
-  default_compiler_configs -= default_compiler_configs_remove
+  if (defined(default_compiler_configs_remove)) {
+    default_compiler_configs -= default_compiler_configs_remove
+  }
 }
 
 if (is_android) {
