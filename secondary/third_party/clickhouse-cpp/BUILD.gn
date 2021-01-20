@@ -1,65 +1,69 @@
 source_set("base") {
   sources = [
-    "base/buffer.h",
-    "base/coded.cpp",
-    "base/coded.h",
-    "base/compressed.cpp",
-    "base/compressed.h",
-    "base/input.cpp",
-    "base/input.h",
-    "base/output.cpp",
-    "base/output.h",
-    "base/platform.cpp",
-    "base/platform.h",
-    "base/singleton.h",
-    "base/socket.cpp",
-    "base/socket.h",
-    "base/string_utils.h",
-    "base/wire_format.h",
+    "clickhouse/base/buffer.h",
+    "clickhouse/base/coded.cpp",
+    "clickhouse/base/coded.h",
+    "clickhouse/base/compressed.cpp",
+    "clickhouse/base/compressed.h",
+    "clickhouse/base/input.cpp",
+    "clickhouse/base/input.h",
+    "clickhouse/base/output.cpp",
+    "clickhouse/base/output.h",
+    "clickhouse/base/platform.cpp",
+    "clickhouse/base/platform.h",
+    "clickhouse/base/singleton.h",
+    "clickhouse/base/socket.cpp",
+    "clickhouse/base/socket.h",
+    "clickhouse/base/string_utils.h",
+    "clickhouse/base/wire_format.h",
   ]
+
   configs += [ "contrib:includes" ]
 }
 
 source_set("columns") {
   sources = [
-    "columns/array.cpp",
-    "columns/array.h",
-    "columns/column.h",
-    "columns/date.cpp",
-    "columns/date.h",
-    "columns/decimal.cpp",
-    "columns/decimal.h",
-    "columns/enum.cpp",
-    "columns/enum.h",
-    "columns/factory.cpp",
-    "columns/factory.h",
-    "columns/ip4.cpp",
-    "columns/ip4.h",
-    "columns/ip6.cpp",
-    "columns/ip6.h",
-    "columns/nothing.h",
-    "columns/nullable.cpp",
-    "columns/nullable.h",
-    "columns/numeric.cpp",
-    "columns/numeric.h",
-    "columns/string.cpp",
-    "columns/string.h",
-    "columns/tuple.cpp",
-    "columns/tuple.h",
-    "columns/utils.h",
-    "columns/uuid.cpp",
-    "columns/uuid.h",
+    "clickhouse/columns/array.cpp",
+    "clickhouse/columns/array.h",
+    "clickhouse/columns/column.h",
+    "clickhouse/columns/date.cpp",
+    "clickhouse/columns/date.h",
+    "clickhouse/columns/decimal.cpp",
+    "clickhouse/columns/decimal.h",
+    "clickhouse/columns/enum.cpp",
+    "clickhouse/columns/enum.h",
+    "clickhouse/columns/factory.cpp",
+    "clickhouse/columns/factory.h",
+    "clickhouse/columns/ip4.cpp",
+    "clickhouse/columns/ip4.h",
+    "clickhouse/columns/ip6.cpp",
+    "clickhouse/columns/ip6.h",
+    "clickhouse/columns/nothing.h",
+    "clickhouse/columns/nullable.cpp",
+    "clickhouse/columns/nullable.h",
+    "clickhouse/columns/numeric.cpp",
+    "clickhouse/columns/numeric.h",
+    "clickhouse/columns/string.cpp",
+    "clickhouse/columns/string.h",
+    "clickhouse/columns/tuple.cpp",
+    "clickhouse/columns/tuple.h",
+    "clickhouse/columns/utils.h",
+    "clickhouse/columns/uuid.cpp",
+    "clickhouse/columns/uuid.h",
   ]
   configs += [ "contrib:includes" ]
 }
 
 source_set("types") {
   sources = [
-    "types/type_parser.cpp",
-    "types/type_parser.h",
-    "types/types.cpp",
-    "types/types.h",
+    "clickhouse/types/type_parser.cpp",
+    "clickhouse/types/type_parser.h",
+    "clickhouse/types/types.cpp",
+    "clickhouse/types/types.h",
   ]
+
+  deps = [ "contrib" ]
+
   configs += [ "contrib:includes" ]
 }
 
@@ -80,8 +84,7 @@ source_set("clickhouse-cpp") {
     ":base",
     ":columns",
     ":types",
-    "contrib",
   ]
 
-  configs += [ "contrib:includes" ]
+  public_configs = [ "contrib:includes" ]
 }
