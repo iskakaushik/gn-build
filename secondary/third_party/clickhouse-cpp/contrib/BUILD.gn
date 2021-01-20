@@ -1,0 +1,11 @@
+config("includes") {
+  include_dirs = [ "//third_party/clickhouse-cpp/contrib" ]
+}
+
+group("contrib") {
+  deps = [
+    "absl:numeric",
+    "cityhash",
+    "lz4",
+  ]
+}

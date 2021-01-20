@@ -1,0 +1,8 @@
+source_set("cityhash") {
+  sources = [
+    "city.cc",
+    "city.h",
+    "citycrc.h",
+    "config.h",
+  ]
+}

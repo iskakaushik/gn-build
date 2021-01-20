@@ -1,0 +1,25 @@
+source_set("base") {
+  sources = [
+    "base/attributes.h",
+    "base/config.h",
+    "base/internal/bits.h",
+    "base/macros.h",
+    "base/optimization.h",
+    "base/options.h",
+    "base/policy_checks.h",
+    "base/port.h",
+  ]
+
+  visibility = [ ":*" ]
+
+  public_configs = [ "../:includes" ]
+}
+
+source_set("numeric") {
+  sources = [
+    "numeric/int128.cc",
+    "numeric/int128.h",
+  ]
+
+  deps = [ ":base" ]
+}

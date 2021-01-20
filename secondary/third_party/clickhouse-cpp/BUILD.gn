@@ -1,0 +1,87 @@
+source_set("base") {
+  sources = [
+    "base/buffer.h",
+    "base/coded.cpp",
+    "base/coded.h",
+    "base/compressed.cpp",
+    "base/compressed.h",
+    "base/input.cpp",
+    "base/input.h",
+    "base/output.cpp",
+    "base/output.h",
+    "base/platform.cpp",
+    "base/platform.h",
+    "base/singleton.h",
+    "base/socket.cpp",
+    "base/socket.h",
+    "base/string_utils.h",
+    "base/wire_format.h",
+  ]
+  configs += [ "contrib:includes" ]
+}
+
+source_set("columns") {
+  sources = [
+    "columns/array.cpp",
+    "columns/array.h",
+    "columns/column.h",
+    "columns/date.cpp",
+    "columns/date.h",
+    "columns/decimal.cpp",
+    "columns/decimal.h",
+    "columns/enum.cpp",
+    "columns/enum.h",
+    "columns/factory.cpp",
+    "columns/factory.h",
+    "columns/ip4.cpp",
+    "columns/ip4.h",
+    "columns/ip6.cpp",
+    "columns/ip6.h",
+    "columns/nothing.h",
+    "columns/nullable.cpp",
+    "columns/nullable.h",
+    "columns/numeric.cpp",
+    "columns/numeric.h",
+    "columns/string.cpp",
+    "columns/string.h",
+    "columns/tuple.cpp",
+    "columns/tuple.h",
+    "columns/utils.h",
+    "columns/uuid.cpp",
+    "columns/uuid.h",
+  ]
+  configs += [ "contrib:includes" ]
+}
+
+source_set("types") {
+  sources = [
+    "types/type_parser.cpp",
+    "types/type_parser.h",
+    "types/types.cpp",
+    "types/types.h",
+  ]
+  configs += [ "contrib:includes" ]
+}
+
+source_set("clickhouse-cpp") {
+  sources = [
+    "clickhouse/block.cpp",
+    "clickhouse/block.h",
+    "clickhouse/client.cpp",
+    "clickhouse/client.h",
+    "clickhouse/error_codes.h",
+    "clickhouse/exceptions.h",
+    "clickhouse/protocol.h",
+    "clickhouse/query.cpp",
+    "clickhouse/query.h",
+  ]
+
+  deps = [
+    ":base",
+    ":columns",
+    ":types",
+    "contrib",
+  ]
+
+  configs += [ "contrib:includes" ]
+}
