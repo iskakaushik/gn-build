@@ -332,8 +332,9 @@ default_compiler_configs = [
   "//build/config:rtti",
   "//build/config:exceptions",
   "//build/config:runtime_library",
-  "//build/config:symbol_visibility_hidden",
+  # "//build/config:symbol_visibility_hidden",
 ]
+
 if (is_win) {
   default_compiler_configs += [
     "//build/config/win:utf8",

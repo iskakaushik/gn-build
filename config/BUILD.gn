@@ -4,8 +4,8 @@
 
 import("//build/config/compiler.gni")
 import("//build/config/sanitizers/sanitizers.gni")
-import("//build/toolchain/toolchain.gni")
 import("//build/toolchain/clang.gni")
+import("//build/toolchain/toolchain.gni")
 
 if (current_cpu == "arm" || current_cpu == "arm64") {
   import("//build/config/arm.gni")
@@ -650,7 +650,8 @@ config("compiler_arm_fpu") {
 }
 
 config("compiler_arm_thumb") {
-  if (current_cpu == "arm" && arm_use_thumb && is_posix && !(is_mac || is_ios)) {
+  if (current_cpu == "arm" && arm_use_thumb && is_posix &&
+      !(is_mac || is_ios)) {
     cflags = [ "-mthumb" ]
     if (is_android && !is_clang) {
       # Clang doesn't support this option.

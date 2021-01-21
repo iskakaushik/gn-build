@@ -3,10 +3,10 @@
 # found in the LICENSE file.
 
 import("//build/config/sanitizers/sanitizers.gni")
-import("//build/toolchain/win/settings.gni")
+import("//build/toolchain/clang.gni")
 import("//build/toolchain/clang_static_analyzer.gni")
 import("//build/toolchain/toolchain.gni")
-import("//build/toolchain/clang.gni")
+import("//build/toolchain/win/settings.gni")
 
 # Should only be running on Windows.
 assert(is_win)
@@ -124,7 +124,8 @@ template("msvc_toolchain") {
     # passing in a list of include directories isn't enough.
     if (defined(invoker.sys_include_flags)) {
       env_wrapper = ""
-      sys_include_flags = "${invoker.sys_include_flags} "  # Note trailing space.
+      sys_include_flags =
+          "${invoker.sys_include_flags} "  # Note trailing space.
     } else {
       # clang-cl doesn't need this env hoop, so omit it there.
       assert(!toolchain_uses_clang)
@@ -177,9 +178,7 @@ template("msvc_toolchain") {
       pdbname = "{{target_out_dir}}/{{label_name}}_c.pdb"
 
       description = "CC {{output}}"
-      outputs = [
-        "$object_path.obj",
-      ]
+      outputs = [ "$object_path.obj" ]
 
       if (toolchain_uses_clang) {
         depsformat = "gcc"
@@ -201,9 +200,7 @@ template("msvc_toolchain") {
       pdbname = "{{target_out_dir}}/{{label_name}}_cc.pdb"
 
       description = "CXX {{output}}"
-      outputs = [
-        "$object_path.obj",
-      ]
+      outputs = [ "$object_path.obj" ]
 
       if (toolchain_uses_clang) {
         depsformat = "gcc"
@@ -221,9 +218,7 @@ template("msvc_toolchain") {
           rebase_path("//build/toolchain/win/rc_wrapper.py", root_build_dir)
       command = "$python_path $rc_wrapper $env {{source}} {{output}} rc.exe {{defines}} {{include_dirs}}"
       depsformat = "msvc"
-      outputs = [
-        "$object_path.res",
-      ]
+      outputs = [ "$object_path.res" ]
       description = "RC {{output}}"
     }
 
@@ -237,9 +232,7 @@ template("msvc_toolchain") {
           rebase_path("//build/toolchain/win/asm_wrapper.py", root_build_dir)
       command = "$python_path $asm_wrapper $env $ml {{defines}} {{include_dirs}} {{asmflags}} /c /Fo{{output}} {{source}}"
       description = "ASM {{output}}"
-      outputs = [
-        "$object_path.obj",
-      ]
+      outputs = [ "$object_path.obj" ]
     }
 
     tool("alink") {
@@ -260,7 +253,9 @@ template("msvc_toolchain") {
     }
 
     tool("solink") {
-      dllname = "{{output_dir}}/{{target_output_name}}{{output_extension}}"  # e.g. foo.dll
+      dllname =
+          "{{output_dir}}/{{target_output_name}}{{output_extension}}"  # e.g.
+                                                                       # foo.dll
       libname = "${dllname}.lib"  # e.g. foo.dll.lib
       pdbname = "${dllname}.pdb"
       rspfile = "${dllname}.rsp"
@@ -294,7 +289,9 @@ template("msvc_toolchain") {
     }
 
     tool("solink_module") {
-      dllname = "{{output_dir}}/{{target_output_name}}{{output_extension}}"  # e.g. foo.dll
+      dllname =
+          "{{output_dir}}/{{target_output_name}}{{output_extension}}"  # e.g.
+                                                                       # foo.dll
       pdbname = "${dllname}.pdb"
       rspfile = "${dllname}.rsp"
       pool = "//build/toolchain:link_pool($default_toolchain)"
@@ -304,9 +301,7 @@ template("msvc_toolchain") {
       default_output_extension = ".dll"
       default_output_dir = "{{root_out_dir}}"
       description = "LINK_MODULE(DLL) {{output}}"
-      outputs = [
-        dllname,
-      ]
+      outputs = [ dllname ]
       if (symbol_level != 0) {
         outputs += [ pdbname ]
       }
@@ -338,9 +333,7 @@ template("msvc_toolchain") {
       default_output_extension = ".exe"
       default_output_dir = "{{root_out_dir}}"
       description = "LINK {{output}}"
-      outputs = [
-        exename,
-      ]
+      outputs = [ exename ]
       if (symbol_level != 0) {
         outputs += [ pdbname ]
       }

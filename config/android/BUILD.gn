@@ -2,8 +2,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-import("//build/toolchain/android/settings.gni")
 import("//build/config/sanitizers/sanitizers.gni")
+import("//build/toolchain/android/settings.gni")
 
 assert(is_android)
 
@@ -34,7 +34,8 @@ config("compiler") {
       cflags += [
         # TODO(gordanac) Enable integrated-as.
         "-fno-integrated-as",
-        "-B${rebased_android_toolchain_root}/bin",  # Else /usr/bin/as gets picked up.
+        "-B${rebased_android_toolchain_root}/bin",  # Else /usr/bin/as gets
+                                                    # picked up.
       ]
     }
   } else {

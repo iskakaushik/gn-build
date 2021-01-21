@@ -3,10 +3,10 @@
 # found in the LICENSE file.
 
 import("//build/toolchain/android/settings.gni")
-import("//build/toolchain/toolchain.gni")
-import("//build/toolchain/sysroot.gni")
-import("//build/toolchain/gcc_toolchain.gni")
 import("//build/toolchain/clang.gni")
+import("//build/toolchain/gcc_toolchain.gni")
+import("//build/toolchain/sysroot.gni")
+import("//build/toolchain/toolchain.gni")
 
 # The Android GCC toolchains share most of the same parameters, so we have this
 # wrapper around gcc_toolchain to avoid duplication of logic.
